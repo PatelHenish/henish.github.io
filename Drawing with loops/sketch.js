@@ -14,11 +14,11 @@ function setup() {
 
 function draw() {
   mybackground();
-  let rectHeight = 75
+  let rectHeight = 1
   noStroke();
-  for(let y = height; y >= 0; y -= 100 ){
+  for(let y = height; y >= 0; y -= rectHeight ){
     let value = map(y,0,height,0,255);
-    fill(value, 255-value, 255-value);
+    fill(value, 255-value, 225);
     rect(0,y,width, rectHeight);
   }
   
