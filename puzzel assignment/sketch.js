@@ -149,3 +149,4 @@ function resetGame() {
 // running the game
 randomizeBoard();
 drawBoard();
+
