@@ -4,9 +4,8 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-
 let scale = 15;
-let leafDepth = 4; // default depth to draw leaves
+let leafDepth = 4; // Default depth to draw leaves
 
 function setup() {
   createCanvas(500, 500);
@@ -36,9 +35,11 @@ function drawTree(x1, y1, angle, depth, branchAngle) {
     // Draw the current branch
     drawLine(x1, y1, x2, y2, depth);
 
-    // Recursive calls for the three branches
+    // Recursive calls for the five branches
     drawTree(x2, y2, angle - branchAngle, depth - 1, branchAngle);
-    drawTree(x2, y2, angle, depth - 1, branchAngle); // center branch
+    drawTree(x2, y2, angle - branchAngle / 2, depth - 1, branchAngle);
+    drawTree(x2, y2, angle, depth - 1, branchAngle); // Center branch
+    drawTree(x2, y2, angle + branchAngle / 2, depth - 1, branchAngle);
     drawTree(x2, y2, angle + branchAngle, depth - 1, branchAngle);
 
     // Add leaves at branches with depth less than leafDepth
