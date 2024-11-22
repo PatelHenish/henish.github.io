@@ -1,69 +1,101 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
-let scale = 15;
-let leafDepth = 4; // Default depth to draw leaves
+const board = document.getElementById('board');
+const movesCountElem = document.getElementById('movesCount');
+const timerElem = document.getElementById('timer');
+const restartButton = document.getElementById('restartButton');
 
-function setup() {
-  createCanvas(500, 500);
-  background(255);
+let cardsArray = ["A", "B", "C", "D", "A", "B", "C", "D"];
+let moves = 0;
+let flippedCards = [];
+let matchedPairs = 0;
+let timer;
+let seconds = 0;
+
+// Shuffle the cards
+function shuffleCards() {
+    cardsArray.sort(() => Math.random() - 0.5);
 }
 
-function draw() {
-  background(255);
-  let angle = map(mouseX, 0, width, 10, 45); // Adjust angle based on mouseX
-  drawTree(width / 2, height * 0.9, -90, 6, angle); // Initial call to drawTree
+// Set up the game
+function setupGame() {
+    board.innerHTML = "";
+    shuffleCards();
+    cardsArray.forEach((cardValue, index) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.dataset.value = cardValue;
+
+        // Front and back of the card
+        const front = document.createElement("div");
+        front.classList.add("front");
+        front.textContent = cardValue;
+
+        const back = document.createElement("div");
+        back.classList.add("back");
+
+        card.appendChild(front);
+        card.appendChild(back);
+
+        card.addEventListener("click", () => flipCard(card));
+        board.appendChild(card);
+    });
+
+    moves = 0;
+    seconds = 0;
+    matchedPairs = 0;
+    movesCountElem.textContent = moves;
+    timerElem.textContent = "00:00";
+    clearInterval(timer);
+    startTimer();
 }
 
-// Draw a branch of the tree
-function drawLine(x1, y1, x2, y2, depth) {
-  stroke(0); // Black branches
-  strokeWeight(depth * 1.5); // Thickness based on depth
-  line(x1, y1, x2, y2);
-}
+// Flip a card
+function flipCard(card) {
+    if (flippedCards.length < 2 && !card.classList.contains("flip") && card !== flippedCards[0]) {
+        card.classList.add("flip");
+        flippedCards.push(card);
 
-// Recursive function to draw the tree
-function drawTree(x1, y1, angle, depth, branchAngle) {
-  if (depth > 0) {
-    // Calculate branch endpoints
-    let x2 = x1 + cos(radians(angle)) * depth * scale;
-    let y2 = y1 + sin(radians(angle)) * depth * scale;
-
-    // Draw the current branch
-    drawLine(x1, y1, x2, y2, depth);
-
-    // Recursive calls for the five branches
-    drawTree(x2, y2, angle - branchAngle, depth - 1, branchAngle);
-    drawTree(x2, y2, angle - branchAngle / 2, depth - 1, branchAngle);
-    drawTree(x2, y2, angle, depth - 1, branchAngle); // Center branch
-    drawTree(x2, y2, angle + branchAngle / 2, depth - 1, branchAngle);
-    drawTree(x2, y2, angle + branchAngle, depth - 1, branchAngle);
-
-    // Add leaves at branches with depth less than leafDepth
-    if (depth < leafDepth) {
-      drawLeaf(x2, y2, depth);
+        if (flippedCards.length === 2) {
+            checkForMatch();
+        }
     }
-  }
 }
 
-// Function to draw a leaf (balloon)
-function drawLeaf(x, y, depth) {
-  noStroke();
-  // Random color for the leaf
-  fill(random(255), random(255), random(255), 200);
-  // Random size based on depth (closer to trunk, larger leaves)
-  let leafSize = map(depth, 1, 6, 10, 30);
-  ellipse(x, y, random(leafSize * 0.8, leafSize * 1.2)); // Randomize size a bit
+// Check for a match
+function checkForMatch() {
+    moves++;
+    movesCountElem.textContent = moves;
+
+    const [card1, card2] = flippedCards;
+    if (card1.dataset.value === card2.dataset.value) {
+        matchedPairs++;
+        flippedCards = [];
+
+        // Check if all pairs are matched
+        if (matchedPairs === cardsArray.length / 2) {
+            clearInterval(timer);
+            alert("You win!");
+        }
+    } else {
+        setTimeout(() => {
+            card1.classList.remove("flip");
+            card2.classList.remove("flip");
+            flippedCards = [];
+        }, 1000);
+    }
 }
 
-// Keyboard controls for leaf depth
-function keyPressed() {
-  if (key === 'z' && leafDepth > 1) {
-    leafDepth--; // Decrease leaf depth
-  } else if (key === 'x' && leafDepth < 6) {
-    leafDepth++; // Increase leaf depth
-  }
+// Start the timer
+function startTimer() {
+    timer = setInterval(() => {
+        seconds++;
+        let mins = Math.floor(seconds / 60).toString().padStart(2, "0");
+        let secs = (seconds % 60).toString().padStart(2, "0");
+        timerElem.textContent = `${mins}:${secs}`;
+    }, 1000);
 }
+
+// Restart game
+restartButton.addEventListener("click", setupGame);
+
+// Initialize game
+setupGame();

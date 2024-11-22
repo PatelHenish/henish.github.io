@@ -14,7 +14,7 @@ function draw() {
 
   
   rotateX(rotateXAngle);
-  rotateY(rotateYAngle);
+  rotateY(rotateYAngle);  
 
  
   for (let i = 0; i < 360; i += 45) {
