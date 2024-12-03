@@ -5,10 +5,21 @@
 
 const pieceSymbol = {
   empty:"",
-  whitePawn: "",
-  WhiteRook: "",
-  WhiteKnight: "",
-  WhiteBishop: "",  
-}
+  whitePawn: "♙",
+  WhiteRook: "♖",
+  WhiteKnight: "♘",
+  WhiteBishop: "♗",
+  WhiteQueen: "♕",
+  WhiteKing:"♔",
+  BlackPawn: "♙",
+  BlackRook: "♖",
+  BlackKnight: "♘",
+  Blackbishop: "♗",
+  BlackQueen: "♕",
+  BlackKing: "♔",
+
+};
+
+function initializeBoard();
 
 
