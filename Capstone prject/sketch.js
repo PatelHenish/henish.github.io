@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 // Capstonbe project 
 // Henish and Sahil "patel" 
 // 12/02/2024    Month/day/year
@@ -30,24 +31,47 @@ function initializeBoard() {
       pieceSymbols.blackKnight,
       pieceSymbols.blackBishop,
       pieceSymbols.blackQueen,
-      pieceSymbols.blackKing,   
+      pieceSymbols.blackKing,
       pieceSymbols.blackBishop,
       pieceSymbols.blackKnight,
       pieceSymbols.blackRook,
   ];
   boardState[1] = Array(8).fill(pieceSymbols.blackPawn);
- 
-// white pieces 
-boardState[8] = Array(8).fill(pieceSymbol.BlackPawn);
-boardState[7]= 
-    pieceSymbols.whiteRook,
-    pieceSymbols.whiteKnight,
-    pieceSymbols.whiteBishopBishop,
-    pieceSymbols.whiteQueen,
-    pieceSymbols.whiteKing,
-    pieceSymbols.whiteBishop,
-    pieceSymbols.whiteKnight,
-    pieceSymbols.whiteRook,
-    
+
+  // White pieces
+  boardState[6] = Array(8).fill(pieceSymbols.whitePawn);
+  boardState[7] = [
+      pieceSymbols.whiteRook,
+      pieceSymbols.whiteKnight,
+      pieceSymbols.whiteBishop,
+      pieceSymbols.whiteQueen,
+      pieceSymbols.whiteKing,
+      pieceSymbols.whiteBishop,
+      pieceSymbols.whiteKnight,
+      pieceSymbols.whiteRook,
+  ];
 }
 
+function renderBoard() {
+  const chessboard = document.getElementById("chessboard");
+  chessboard.innerHTML = ""; // Clear the board
+
+  for (let row = 0; row < 8; row++) {
+      const tableRow = document.createElement("tr");
+      for (let col = 0; col < 8; col++) {
+          const cell = document.createElement("td");
+          cell.className = (row + col) % 2 === 0 ? "light" : "dark";
+          cell.textContent = boardState[row][col];
+          cell.dataset.row = row;
+          cell.dataset.col = col;
+
+          // Add click handler for interaction
+          cell.addEventListener("click", function () {
+              return handleCellClick(cell);
+            });
+
+          tableRow.appendChild(cell);
+      }
+      chessboard.appendChild(tableRow);
+  }
+}
