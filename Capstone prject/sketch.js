@@ -75,3 +75,9 @@ function renderBoard() {
       chessboard.appendChild(tableRow);
   }
 }
+
+
+
+
+
+
