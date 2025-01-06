@@ -1,4 +1,4 @@
-/* eslint-disable indent */
+
 // Capstonbe project 
 // Henish and Sahil "patel" 
 // 12/02/2024    Month/day/year
@@ -76,10 +76,3 @@ function renderBoard() {
   }
   
 }
-
-
-
-
-
-
-
