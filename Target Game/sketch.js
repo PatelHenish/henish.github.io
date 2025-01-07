@@ -36,39 +36,39 @@
 
 // point use mouse x and mouse y 
 
-let boxX = 300;   let boxY = 150;
-let boxLength = 300;  let boxHeight = 70;
+// let boxX = 300;   let boxY = 150;
+// let boxLength = 300;  let boxHeight = 70;
 
-let circleDiamter = 120;
+// let circleDiamter = 120;
 
-function setup( ){
-  createCanvas(windowWidth, windowHeight);
-  noCursor();
-  rectMode(CORNER);
-  ellipseMode(CENTER);
+// function setup( ){
+//   createCanvas(windowWidth, windowHeight);
+//   noCursor();
+//   rectMode(CORNER);
+//   ellipseMode(CENTER);
 
 
-}
+// }
 
-function draw(){
-  background(220);
+// function draw(){
+//   background(220);
   
-}
+// }
 
-// Draw box
-if(collideRectCircle(boxX, boxY, boxLength, boxHeight, mouseX, mouseY, circleDiamter)){
-  fill(225,225,0);
-}
-else{
-  fill(255);
-}
+// // Draw box
+// if(collideRectCircle(boxX, boxY, boxLength, boxHeight, mouseX, mouseY, circleDiamter)){
+//   fill(225,225,0);
+// }
+// else{
+//   fill(255);
+// }
 
-rect(boxX, boxY, boxLength, boxHeight);
+// rect(boxX, boxY, boxLength, boxHeight);
 
 
-//Draw circle 
-fill(255,150);
-ellipse(mouseX, mouseY, circleDiamter, circleDiamter);
+// //Draw circle 
+// fill(255,150);
+// ellipse(mouseX, mouseY, circleDiamter, circleDiamter);
 
 
 
@@ -84,3 +84,8 @@ ellipse(mouseX, mouseY, circleDiamter, circleDiamter);
 
 //   rect(rX, rY, rWidth, rHeight);
 // }
+
+
+
+
+
