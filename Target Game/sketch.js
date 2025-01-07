@@ -29,28 +29,58 @@
 
 // POINT RECTANGLE COLLISION..........................................................................
 
-let rX = 200; let rY = 150;
-let rWidth =  300; let rHeight = 100;
-let rLeft = rX; let rTop = rY;
-let rRight = rX + rWidth; let rBottom = rTop + rHeight; 
+// let rX = 200; let rY = 150;
+// let rWidth =  300; let rHeight = 100;
+// let rLeft = rX; let rTop = rY;
+// let rRight = rX + rWidth; let rBottom = rTop + rHeight; 
 
 // point use mouse x and mouse y 
 
+let boxX = 300;   let boxY = 150;
+let boxLength = 300;  let boxHeight = 70;
+
+let circleDiamter = 120;
+
 function setup( ){
   createCanvas(windowWidth, windowHeight);
+  noCursor();
+  rectMode(CORNER);
+  ellipseMode(CENTER);
+
 
 }
 
 function draw(){
-  background(225);
-  fill(255);
-
-  // if mousex > left and mousex < right 
-  if(mouseX > rLeft && mouseX < rRight){
-    if(mouseY > rTop && mouseY < rBottom){
-      fill(200,54,196); 
-    }
-  }
-
-  rect(rX, rY, rWidth, rHeight);
+  background(220);
+  
 }
+
+// Draw box
+if(collideRectCircle(boxX, boxY, boxLength, boxHeight, mouseX, mouseY, circleDiamter)){
+  fill(225,225,0);
+}
+else{
+  fill(255);
+}
+
+rect(boxX, boxY, boxLength, boxHeight);
+
+
+//Draw circle 
+fill(255,150);
+ellipse(mouseX, mouseY, circleDiamter, circleDiamter);
+
+
+
+
+
+
+//   // if mousex > left and mousex < right 
+//   if(mouseX > rLeft && mouseX < rRight){
+//     if(mouseY > rTop && mouseY < rBottom){
+//       fill(200,54,196); 
+//     }
+//   }
+
+//   rect(rX, rY, rWidth, rHeight);
+// }
