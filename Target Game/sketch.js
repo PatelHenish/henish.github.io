@@ -111,6 +111,12 @@ function draw(){
 
 }
 
+function keyPressed(){
+  if (key === " "){
+    currentGame.createshot();
+  }
+}
+
 
 function quickInput(){
   if(keyIsDown(LEFT_ARROW)){
@@ -121,8 +127,8 @@ function quickInput(){
   }
   if(keyIsDown(UP_ARROW)){
     currentGame.changePower(true);
+  }
   if(keyIsDown(DOWN_ARROW)){
     currentGame.changePower(false);
-    }
   }
 }

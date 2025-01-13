@@ -11,16 +11,47 @@ class Game{
     imageMode(CORNER);
     image(backImage,0,0);
 
-    // process and draw every cannonball
+    imageMode(CENTER);
 
+    // process and draw every cannonball
+    for(let i = 0; i < this.shots.length; i++){
+      let b = this.shots[i];
+      b.move();
+      b.display();
+      b.checkGroundCollision();
+      // check the target collisions 
+      if(b.getAlive()===false){
+        if(b.getCollisionType()===1){
+          //ground collisions
+          this.shots.splice(i,  1);
+          i--;
+        }
+      }
+
+    }
 
     // process and draw every smoke particals
+
+
+
+    //process and draw every explostion that is active
+
+
+
+    // draw the correct image for number of shots left and targets hit 
 
     //draw the cannon
     this.displayCannon();
     this.displayPower();
 
 
+
+  }
+
+  createshot(){
+    let v = createVector(this.cannonPower * cos(radians(this.cannonAngle)),
+    this.cannonPower * sin(radians(this.cannonAngle)*-1));
+    this.shots.push(new Ball(v));
 
   }
     

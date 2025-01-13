@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 function preload() {
     backImage = loadImage("assets/background.png"); 
     backImageReport = loadImage("assets/backgroundReport.png");
