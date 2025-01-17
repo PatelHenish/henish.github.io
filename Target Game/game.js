@@ -4,6 +4,8 @@ class Game{
     this.cannonAngle = 60;
     this.cannonPower = 10;
     this.shots = [];
+    this.targetx = 600;
+    this.targety = 300;
   }
 
   play(){
@@ -19,7 +21,8 @@ class Game{
       b.move();
       b.display();
       b.checkGroundCollision();
-      // check the target collisions 
+      // check the target collisions
+      b.checkTargetcollision();
       if(b.getAlive()===false){
         if(b.getCollisionType()===1){
           //ground collisions
@@ -43,16 +46,21 @@ class Game{
     //draw the cannon
     this.displayCannon();
     this.displayPower();
-
+    this.displayTarget();
 
 
   }
 
   createshot(){
     let v = createVector(this.cannonPower * cos(radians(this.cannonAngle)),
-    this.cannonPower * sin(radians(this.cannonAngle)*-1));
+      this.cannonPower * sin(radians(this.cannonAngle)*-1));
     this.shots.push(new Ball(v));
 
+  }
+
+  displayTarget(){ 
+    image(targetImage,this.targetx,this.targety);        
+    
   }
     
   displayCannon(){
@@ -83,7 +91,6 @@ class Game{
       if(this.cannonPower > 5) {
         this.cannonPower -= 0.15;
       }
-  
     }
   }
 
@@ -101,9 +108,6 @@ class Game{
 
     }
   }
-
-
-
 
 
 }

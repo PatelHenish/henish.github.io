@@ -39,4 +39,13 @@ class Ball{
     }
   }
 
+  checkTargetcollision(){
+    if(dist(this.pos.x, this.pos.y, currentGame.targetx, currentGame.targety) < 40){
+      this.alive = false;
+      this.collisionType = 2;
+      currentGame.targetx = random(50,600);
+      currentGame.targetY = random(50,600);
+    }
+  }
+
 }
